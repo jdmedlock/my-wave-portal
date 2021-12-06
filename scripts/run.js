@@ -9,27 +9,28 @@ const main = async () => {
 
   let waveCount
 
-  const listWavers = () {
-    let wavers = []
-    for (i = 0; i < wavers.length; i++) {
-      console.log(waveTxn.getWaver(i));
+  const listWavers = async (waveContract) => {
+    let noWavers = await waveContract.getNoWavers()
+    console.log("noWavers: ", noWavers)
+    for (i = 0; i < noWavers; i++) {
+      let waver = await waveContract.getWaver(i)
+      console.log(waver)
     } 
   }
   
   waveCount = await waveContract.getTotalWaves()
-  listWavers()
   
   let waveTxn = await waveContract.wave()
   await waveTxn.wait()
 
   waveCount = await waveContract.getTotalWaves()
-  listWavers()
+  await listWavers(waveContract)
 
   waveTxn = await waveContract.connect(randomPerson).wave()
   await waveTxn.wait()
 
   waveCount = await waveContract.getTotalWaves()
-  listWavers()
+  await listWavers(waveContract)
 };
 
 const runMain = async () => {
