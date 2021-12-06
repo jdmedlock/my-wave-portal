@@ -4,17 +4,17 @@ const main = async () => {
   const waveContract = await waveContractFactory.deploy()
   await waveContract.deployed()
 
-  console.log("Contract deployed to:", waveContract.address)
+  console.log("\nContract deployed to:", waveContract.address)
   console.log("Contract deployed by:", owner.address)
 
-  let waveCount
+  let waverCount = 0
 
   const listWavers = async (waveContract) => {
-    let noWavers = await waveContract.getNoWavers()
-    console.log("noWavers: ", noWavers)
-    for (i = 0; i < noWavers; i++) {
-      let waver = await waveContract.getWaver(i)
-      console.log(waver)
+    waverCount = await waveContract.getNoWavers()
+    console.log(`\nWe've been waved at ${ waverCount } times!`)
+    for (waverNo = 0; waverNo < waverCount; waverNo++) {
+      let waver = await waveContract.getWaver(waverNo)
+      console.log("...waved at by :", waver)
     } 
   }
   

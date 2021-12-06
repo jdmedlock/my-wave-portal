@@ -15,21 +15,21 @@ contract WavePortal {
   function wave() public {
     totalWaves += 1;
     pushWaver(msg.sender);
-    console.log("%s has waved!", msg.sender);
+    // console.log("%s has waved!", msg.sender);
   }
 
   function getTotalWaves() public view returns (uint256) {
-    console.log("We have %d total waves!", totalWaves);
+    // console.log("We have %d total waves!", totalWaves);
     return totalWaves;
   }
 
   // Retrieve a specific element from the wavers array based on its position.
-  function getWaver(uint elementIndex) public returns(address) {
+  function getWaver(uint elementIndex) public view returns(address) {
     return wavers[elementIndex];
   }
 
   // Retrieve the number of wavers
-  function getNoWavers() public returns(uint) {
+  function getNoWavers() public view returns(uint) {
     return wavers.length;
   }
 
